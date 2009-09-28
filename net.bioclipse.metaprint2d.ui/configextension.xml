@@ -1,0 +1,9 @@
+   <introContent>
+      <extensionContent id="net.bioclipse.intro.workbench.tutorials" style="css/intro.css" name="Bioclipse Tuturials" path="tutorials/@">
+        <group style-id="content-group" id="workbench-group">
+          <link label="MetaPrint2D in Bioclipse" url="http://org.eclipse.ui.intro/showStandby?partId=net.bioclipse.cheatsheet&amp;input=net.bioclipse.m2d.cheatsheet"  id="m2ditem">
+              <text>A tutorial (cheat sheet) for working with MetaPrint2D in Bioclipse.</text>
+     	    </link>
+     	</group>
+      </extensionContent>
+   </introContent>

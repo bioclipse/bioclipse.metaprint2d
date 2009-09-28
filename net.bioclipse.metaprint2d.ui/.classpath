@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry excluding="net/bioclipse/metaprint2d/ColorerAction.java|net/bioclipse/metaprint2d/MetaprintAction.java|net/bioclipse/metaprint2d/ui/MetaprintAction.java|net/bioclipse/metaprint2d/ui/actions/MetaPrint2DHandler_old.java|net/bioclipse/metaprint2d/ui/actions/MetaPrint2DHandler_new.java" kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

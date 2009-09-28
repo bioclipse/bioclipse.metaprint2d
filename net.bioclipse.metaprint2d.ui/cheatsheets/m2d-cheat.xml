@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Getting started with MetaPrint2D">
+   <intro
+         href="/net.bioclipse.metaprint2d.ui/html/m2d_about.html">
+      <description>
+         <b>MetaPrint2D</b>
+This tutorial describes the basic steps for using the MetaPrint2D feature of Bioclipse to predict metabolic sites in chemical structures.
+      </description>
+   </intro>
+
+   <item
+         title="Step 1: Open the MetaPrint2D Perspective">
+      <description>
+         The <b>MetaPrint2D Perspective</b> is a setup of the workbench which is suitable for the MetaPrint2D feature. It simply rearranges the visible Views.
+<br/><br/>
+In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b> and in the dialog select the <b>MetaPrint2D option</b>.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.perspectives.showPerspective(org.eclipse.ui.perspectives.showPerspective.perspectiveId=net.bioclipse.metaprint2d.ui.Metaprint2dPerspective)"/>
+   </item>
+   <item
+         title="Step 2: Open a chemical structure">
+      <description>
+         In the Bioclipse Navigator, double-click a chemical structure to open it in the chemical editor. It is also possible to edit molecules.
+      </description>
+    <action
+			pluginId="net.bioclipse.scripting.ui"
+			class="net.bioclipse.scripting.ui.actions.ScriptAction"
+	        required="false"
+			param1="mol=cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;)"
+			param2="ui.open(mol)"
+			/>
+   </item>
+   <item
+         title="Step 3: Run MetaPrint2D">
+      <description>
+         In the MetaPrint2D toolbar are several buttons. Click on the leftmost, which says "Execute MetaPrint2D on the active molecyle(s)" when hovered upon. 
+      </description>
+      <command
+            required="false"
+            serialization="net.bioclipse.metaprint2d.command"/>
+   </item>
+
+   <item
+         title="Step 4: Examine the results.">
+      <description>
+         MetaPrint2D visualizes the results in a normalized, relative fashion. This means the most likely atom to undergo metabolization is colored RED. Atoms colored ORANGE are moderately likely to undergo metabolization, atoms colored in GREEN are less likely, and atoms with no color have very low probability of metabolization starting in that place.<br/><br/>
+         Hover over the atoms to see detailed results on the form: Number of hits in the reaction centre set, the total number of hits, and the normalised ratio.         <br/><br/>
+         It is possible to edit the molecule and then executing MetaPrint2D again to see the updated result. If you like to turn on automatic recalculation, click on the icon marked with blue arrows saying "Turn on automatic MetaPrint2D calculation". After, edit the molecule and notice how coloring changes as you edit.
+         
+      </description>
+   </item>
+
+   <item
+         title="Step 5: Run MetaPrint2D on multiple molecules">
+      <description>
+         Open an SDFile with several molecules or click below to open a sample file.
+      </description>
+    <action
+			pluginId="net.bioclipse.scripting.ui"
+			class="net.bioclipse.scripting.ui.actions.ScriptAction"
+	        required="false"
+			param1="lst=cdk.createMoleculeList();"
+			param2="lst.add(cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;));"
+			param3="lst.add(cdk.fromSMILES(&quot;NN=C2NN=CC1=CC=CC=C12&quot;));"
+			param4="lst.add(cdk.fromSMILES(&quot;CNC1(CCCCC1(=O))C=2C=CC=CC=2Cl&quot;));"
+			param5="ui.open(lst);"
+			/>
+   </item>
+   <item
+         title="Step 6: Run MetaPrint2D">
+      <description>
+         As above, click the icon in the toolbar to run MetaPrint2D.
+      </description>
+      <command
+            required="false"
+            serialization="net.bioclipse.metaprint2d.command"/>
+   </item>
+   
+
+      <item 
+         title="Step 7: Switch between tabs in the Molecules Table">
+      <description>
+         Select one of the structures in the MoleculesTable and then click the tab <b>2D-structure</b> at the bottom of the editor. 
+         Here you can edit the molecule and switch back to the tab <b>Molecules</b> as desired.
+      </description>
+   </item>
+      <item 
+         title="More information">
+      <description>
+         This step concludes this tutorial. For more information, please refer to the Bioclipse Help system available from the top menu <b>Help > Help Contents</b>.
+      </description>
+          <command
+          required="false"
+          serialization="org.eclipse.ui.help.displayHelp(href=/net.bioclipse.metaprint2d.ui/html/m2d_about.html)"/>
+      
+   </item>
+   
+</cheatsheet>

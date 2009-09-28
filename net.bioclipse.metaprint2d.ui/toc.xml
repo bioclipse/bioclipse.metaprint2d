@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="MetaPrint2D">
+  <topic label="About MetaPrint2D" href="html/m2d_about.html"/>
+  <topic label="Installation" href="html/m2d_installation.html"/>
+  <topic label="User guide" >
+	  <topic label="Menu and Toolbar" href="html/m2d_menuToolbar.html" />
+	  <topic label="Single Molecules" href="html/m2d_single.html" />
+	  <topic label="Multiple Molecules" href="html/m2d_multi.html" />
+	  <topic label="Batch processing" href="html/m2d_batch.html" />
+	  <topic label="Scripting MetaPrint2D" href="html/m2d_script.html" />
+  </topic>
+</toc>

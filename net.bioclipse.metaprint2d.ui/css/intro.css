@@ -1,0 +1,7 @@
+a#weblink { text-align: left; }
+
+#weblink { text-align: left; color: #FF0000;}
+image-right {horizontal-align: right;}
+
+a#m2ditem img { background-image : url(images/metaprint2d_48.png); }
+a#m2ditem:hover img { background-image : url(images/metaprint2d_48.png); }

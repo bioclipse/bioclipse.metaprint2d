@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Metaprint2d
+Bundle-SymbolicName: net.bioclipse.metaprint2d;singleton:=true
+Bundle-Version: 1.0.0.v20090929
+Bundle-Activator: net.bioclipse.metaprint2d.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.apache.log4j;version="1.2.15"
+Bundle-Vendor: The Bioclispe Team
+Bundle-ClassPath: .,
+ jars/metaprint2d-calc-1.0.jar,
+ jars/metaprint2d-common-1.0.jar
+Export-Package: net.bioclipse.metaprint2d,
+ net.sf.metaprint2d,
+ net.sf.metaprint2d.data,
+ net.sf.metaprint2d.mol2

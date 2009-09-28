@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+<extension
+       point="net.bioclipse.cdk.jchempaint.generator">
+    <generator
+          class="net.bioclipse.metaprint2d.ui.MetaPrintGenerator">
+    </generator>
+ </extension>
+
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="MetaPrint2D"
+            class="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective"
+            icon="icons/metaprint2d.gif"
+            id="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective">
+      </perspective>
+   </extension>
+   
+        <extension
+        point="org.eclipse.ui.perspectiveExtensions">
+     <perspectiveExtension
+           targetID="net.bioclipse.ui.Perspective">
+        <perspectiveShortcut
+              id="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective">
+        </perspectiveShortcut>
+     </perspectiveExtension>
+     <perspectiveExtension
+           targetID="net.bioclipse.chemoinformatics.ChemoinformaticsPerspective">
+        <perspectiveShortcut
+              id="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective">
+        </perspectiveShortcut>
+     </perspectiveExtension>
+  </extension>
+   
+
+   <extension
+         point="net.bioclipse.scripting.contribution">
+      <scriptContribution
+            id="net.bioclipse.metaprint2d.ui.business.MetaPrint2DManager"
+            service="net.bioclipse.metaprint2d.ui.business.MetaPrint2DManagerFactory">
+      </scriptContribution>
+   </extension>
+
+
+<extension point="org.eclipse.core.runtime.preferences">
+	<initializer class="net.bioclipse.metaprint2d.ui.prefs.MetaprintPreferenceInitializer"/>
+</extension>
+
+  <extension point="org.eclipse.ui.preferencePages">
+ 	 	<page id="MetaprintPrefsPage"
+ 			name="MetaPrint2D"
+    		class="net.bioclipse.metaprint2d.ui.prefs.MetaprintPrefs">
+     	</page>
+   </extension>
+
+
+<!-- Actions in menu -->
+
+    <extension
+        point="org.eclipse.ui.commands">
+        <category
+              id="net.bioclipse.metaprint2d.category"
+              name="MetaPrint2D">
+        </category>
+
+		<!-- Command to calculate MetaPrint2D -->
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.MetaPrint2DHandler"
+		        id="net.bioclipse.metaprint2d.command"
+		        name="MetaPrint2D">
+		</command>
+
+		<!-- Command to color by CPK -->
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.ClearMetaPrint2DHandler"
+		        id="net.bioclipse.metaprint2d.commands.cpk"
+		        name="Color CPK">
+		</command>
+
+		<!-- Command to toggle automatic MetaPrint2D calculation -->
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.MetaPrint2DHandler"
+		        id="net.bioclipse.metaprint2d.toggleCommand"
+		        name="Toggle MetaPrint2D">
+		</command>
+
+		<!-- Command to calculate MetaPrint2D batch mode-->
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.MetaPrint2DBatchHandler"
+		        id="net.bioclipse.metaprint2d.batchcommand"
+		        name="MetaPrint2D">
+		</command>
+
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.SpeciesHandler"
+		        id="net.bioclipse.dropdown.radio"
+		        name="Species">
+		    <commandParameter
+		            id="net.bioclipse.dropdown.radio.info"
+		            name="Species"
+		            optional="false">
+		    </commandParameter>
+		</command>
+		
+		<command
+		        categoryId="net.bioclipse.metaprint2d.category"
+		        defaultHandler="net.bioclipse.metaprint2d.ui.actions.OperatorHandler"
+		        id="net.bioclipse.dropdown.radio.op"
+		        name="Search mode">
+		    <commandParameter
+		            id="net.bioclipse.dropdown.radio.operator"
+		            name="Search mode"
+		            optional="false">
+		    </commandParameter>
+		</command>
+</extension>
+
+<extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="net.bioclipse.definitions.activeMolEditor">
+         <with
+               variable="activeEditorId">               
+               <or>
+            <equals
+                  value="net.bioclipse.cdk.ui.editors.jchempaint">
+            </equals>
+            <equals
+                  value="net.bioclipse.cdk.ui.editors.jchempaint.mdl">
+            </equals>
+            <equals
+                  value="net.bioclipse.cdk.ui.editors.jchempaint.cml"> 
+            </equals>
+            <equals
+                  value="net.bioclipse.cdk.ui.sdfeditor"> 
+            </equals>
+            </or>
+         </with>
+      </definition>
+      
+</extension>
+
+<extension 
+  point="org.eclipse.ui.menus">
+  
+   <menuContribution
+    locationURI= "menu:org.eclipse.ui.main.menu?after=additions">
+    <menu
+       id="net.bioclipse.metaprint2d"
+       label="MetaPrint2D">
+    </menu>
+ </menuContribution>
+
+ <menuContribution
+    locationURI= "menu:net.bioclipse.metaprint2d?after=additions">
+    <menu
+       id="net.bioclipse.metaprint2d.species"
+       label="Species">
+    </menu>
+ </menuContribution>
+
+<menuContribution
+    locationURI= "menu:net.bioclipse.metaprint2d.species?after=additions">
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio1"
+            label="All"
+            icon="icons/sum16.png"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="All">
+        </parameter>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio3"
+            label="Dog"
+            icon="icons/dog2_16.png"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="Dog">
+        </parameter>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio2"
+            label="Human"
+            icon="icons/human16.png"
+            style="radio">
+        <parameter
+            name="net.bioclipse.dropdown.radio.info"
+            value="Human">
+        </parameter>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio3"
+            label="Rat"
+            icon="icons/rat.gif"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="Rat">
+        </parameter>
+    </command>
+</menuContribution>
+
+
+
+
+
+ <menuContribution
+    locationURI= "menu:net.bioclipse.metaprint2d?after=additions">
+    <menu
+       id="net.bioclipse.metaprint2d.operator"
+       label="Search mode">
+    </menu>
+ </menuContribution>
+
+<menuContribution
+    locationURI= "menu:net.bioclipse.metaprint2d.operator?after=additions">
+    <command
+            commandId="net.bioclipse.dropdown.radio.op"
+            id="net.bioclipse.dropdown.menu.radio2"
+            label="Loose"
+            style="radio">
+        <parameter
+            name="net.bioclipse.dropdown.radio.operator"
+            value="LOOSE">
+        </parameter>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio.op"
+            id="net.bioclipse.dropdown.menu.radio3"
+            label="Standard"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.operator"
+                value="DEFAULT">
+        </parameter>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio.op"
+            id="net.bioclipse.dropdown.menu.radio1"
+            label="Strict"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.operator"
+                value="STRICT">
+        </parameter>
+    </command>
+</menuContribution>
+
+
+
+
+ <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="net.bioclipse.metaprint2d.toolbar">
+	 <command
+            commandId="net.bioclipse.metaprint2d.command"
+            id="net.bioclipse.toolbar.metaprint2d"
+            label="MetaPrint2D"
+            icon="icons/metaprint2d.gif"
+            tooltip="Execute MetaPrint2D on the active molecule(s)">
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+
+	 <command
+            commandId="net.bioclipse.metaprint2d.commands.cpk"
+            id="net.bioclipse.toolbar.metaprint2d.cpk"
+            label="Color CPK"
+            icon="icons/molecule3D.gif"
+            tooltip="Set molecule coloring to CPK">
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+
+	 <command
+            commandId="net.bioclipse.metaprint2d.toggleCommand"
+            id="net.bioclipse.toolbar.metaprint2d.auto"
+            label="Automatic MetaPrint2D"
+            icon="icons/metaprint2d_auto.gif"
+            tooltip="Turn on automatic MetaPrint2D calculation for the active molecule(s)"
+            style="toggle">
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+
+ <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio1"
+            label="All"
+            icon="icons/sum16.png"
+            tooltip="All MetaPrint2D databases"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="All">
+        </parameter>
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio3"
+            label="Dog"
+            icon="icons/dog2_16.png"
+            tooltip="The DOG MetaPrint2D database"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="Dog">
+        </parameter>
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio2"
+            label="Human"
+            icon="icons/human16.png"
+            tooltip="The HUMAN MetaPrint2D database"
+            style="radio">
+        <parameter
+            name="net.bioclipse.dropdown.radio.info"
+            value="Human">
+        </parameter>
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+    <command
+            commandId="net.bioclipse.dropdown.radio"
+            id="net.bioclipse.dropdown.menu.radio3"
+            label="Rat"
+            icon="icons/rat.gif"
+            tooltip="The RAT MetaPrint2D database"
+            style="radio">
+        <parameter
+                name="net.bioclipse.dropdown.radio.info"
+                value="Rat">
+        </parameter>
+		<visibleWhen>
+           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+		</visibleWhen>
+    </command>
+
+            <separator
+                  name="additions"
+                  visible="false">
+            </separator>
+         </toolbar>
+      </menuContribution>
+
+<!--menuContribution
+           locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <command
+              commandId="net.bioclipse.metaprint2d.batchcommand">
+          <visibleWhen>
+    		<iterate operator="and" ifEmpty="false">
+       			<adapt type="org.eclipse.core.resources.IResource">
+       			<or>
+	          		<test property="org.eclipse.core.resources.contentTypeId" 
+            	    	value="net.bioclipse.contenttypes.cml"/>
+    	      		<test property="org.eclipse.core.resources.contentTypeId" 
+        	        	value="net.bioclipse.contenttypes.sdf2d"/>
+    	      		<test property="org.eclipse.core.resources.contentTypeId" 
+        	        	value="net.bioclipse.contenttypes.sdf3d"/>
+                	</or>
+       			</adapt>
+    		</iterate>
+         </visibleWhen>
+        </command>
+</menuContribution-->
+
+</extension>
+
+
+
+
+
+
+<extension
+      point="org.eclipse.ui.startup">
+   <startup
+         class="net.bioclipse.metaprint2d.ui.EmptyStartup"></startup>
+</extension>
+<extension
+      point="org.eclipse.ui.views">
+   <category
+         id="net.bioclipse.metaprint2d.ui"
+         name="MetaPrint2D">
+   </category>
+   <view
+         category="net.bioclipse.metaprint2d.ui"
+         class="net.bioclipse.metaprint2d.ui.views.MetaPrint2DReportView"
+         icon="icons/metaprint2d.gif"
+         id="net.bioclipse.metaprint2d.ui.views.MetaPrint2DReportView"
+         name="MetaPrint2D Report">
+   </view>
+</extension>
+
+   
+   
+    <extension
+       point="net.bioclipse.cdk.propertyCalculator">
+    <Calculator
+          class="net.bioclipse.metaprint2d.ui.MetaPrint2DPropertyCalculator"
+          id="MetaPrint2D">
+    </Calculator>
+ </extension>
+ 
+ 	<extension
+  		point="org.eclipse.ui.menus">
+   <menuContribution
+        locationURI="popup:net.bioclipse.cdk.ui.sdfeditor.menu?after=additions">
+      <command
+           commandId="net.bioclipse.cdk.ui.sdfeditor.addProperty"
+           label="Calculate MetaPrint2D"
+           style="push">
+        <parameter
+              name="net.bioclipse.cdk.ui.sdfeditor.calculatorId"
+              value="MetaPrint2D">
+        </parameter>
+        <visibleWhen
+              checkEnabled="false">
+           <with
+                 variable="activeEditor">
+              <instanceof
+                    value="net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart">
+              </instanceof>
+           </with>
+        </visibleWhen>
+     </command>
+   </menuContribution>
+   
+   		<menuContribution
+			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <command
+              commandId="net.bioclipse.cdk.ui.sdfeditor.addProperty"
+              label="Calculate MetaPrint2D"
+              style="push">
+           <parameter
+                 name="net.bioclipse.cdk.ui.sdfeditor.calculatorId"
+                 value="MetaPrint2D">
+           </parameter>
+           <visibleWhen
+                 checkEnabled="true">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <adapt
+                       type="org.eclipse.core.resources.IResource">
+                    <or>
+                       <test
+                             property="org.eclipse.core.resources.contentTypeId"
+                             value="net.bioclipse.contenttypes.sdf2d">
+                       </test>
+                       <test
+                             property="org.eclipse.core.resources.contentTypeId"
+                             value="net.bioclipse.contenttypes.sdf3d">
+                       </test>
+                       <test
+                             property="org.eclipse.core.resources.contentTypeId"
+                             value="net.bioclipse.contenttypes.sdf0d">
+                       </test>
+                       <test
+                             property="org.eclipse.core.resources.contentTypeId"
+                             value="net.bioclipse.contenttypes.sdf">
+                       </test>
+                    </or>
+                 </adapt>
+              </iterate>
+           </visibleWhen>
+     </command>
+   </menuContribution>
+ </extension>
+   
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   
+    <extension
+       point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+    <category
+          id="net.bioclipse.m2d.cheatsheets"
+          name="MetaPrint2D">
+    </category>
+    <cheatsheet
+          category="net.bioclipse.m2d.cheatsheets"
+          composite="false"
+          contentFile="cheatsheets/m2d-cheat.xml"
+          id="net.bioclipse.m2d.cheatsheet"
+          name="Getting Started with MetaPrint2D">
+    </cheatsheet>
+ </extension>
+
+      <extension point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="configextension.xml"/>  
+   </extension>
+   
+
+</plugin>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="net.bioclipse.metaprint2d_feature"
+      label="MetaPrint2D"
+      version="1.0.0.v20090929"
+      provider-name="The Bioclipse Team"
+      plugin="net.bioclipse.metaprint2d.ui">
+
+   <description>
+      MetaPrint2D is a product to predict sites of metabolism in molecules based on Circular Fingerprints and a preprocessed Symyx Metabolite databse.
+   </description>
+
+   <copyright>
+      Copyright (c) 2009 Ola Spjuth.
+All rights reserved.
+   </copyright>
+
+   <license url="http://www.eclipse.org/org/documents/epl-v10.php">
+      This program and the accompanying materials are made available
+under the terms of the Eclipse Public License v1.0 + exception,
+putting no constraints on choice of backend and/or license for
+creating plugins for Bioclipse; it is totally open for both open
+source plugins as well as commercial. The exception allows GPL
+plugins to be written and run in any combination with EPL licensed
+plugins, addressing incompatibility between the EPL and the GPL
+v.2.
+The Eclipse Public License accompanies this distribution, and
+is available at http://www.eclipse.org/legal/epl-v10.html
+MetaPrint2D library is made available under Lesser Gnu Public
+License (LGPL).
+   </license>
+
+   <requires>
+      <import feature="net.bioclipse.chemoinformatics_feature" version="2.0.1" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="net.bioclipse.metaprint2d"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.bioclipse.metaprint2d.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.bioclipse.cdk.debug"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
