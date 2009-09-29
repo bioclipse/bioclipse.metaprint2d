@@ -344,9 +344,6 @@ public class MetaPrint2DManager implements IMetaPrint2DManager{
 
         try {
             cdk.saveMolecule(cdkmol, filename);
-        } catch ( CDKException e ) {
-            logger.debug("Error serializing molecule to MDL: " + e.getMessage());
-            throw new InvocationTargetException(e);
         } catch (BioclipseException e) {
             logger.debug("Error serializing molecule to MDL: " + e.getMessage());
             throw new InvocationTargetException(e);

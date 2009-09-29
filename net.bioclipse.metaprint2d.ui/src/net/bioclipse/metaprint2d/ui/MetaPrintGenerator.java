@@ -11,11 +11,7 @@
 package net.bioclipse.metaprint2d.ui;
 
  import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.sf.metaprint2d.MetaPrintResult;
 import net.bioclipse.metaprint2d.ui.prefs.MetaprintPrefs;
