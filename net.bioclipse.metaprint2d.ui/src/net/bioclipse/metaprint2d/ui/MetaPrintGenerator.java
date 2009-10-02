@@ -11,6 +11,8 @@
 package net.bioclipse.metaprint2d.ui;
 
  import java.awt.Color;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.metaprint2d.MetaPrintResult;
@@ -24,6 +26,7 @@ import org.openscience.cdk.renderer.elements.ElementGroup;
 import org.openscience.cdk.renderer.elements.IRenderingElement;
 import org.openscience.cdk.renderer.elements.OvalElement;
 import org.openscience.cdk.renderer.generators.IGenerator;
+import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 
 
 public class MetaPrintGenerator implements IGenerator {
@@ -101,5 +104,9 @@ public class MetaPrintGenerator implements IGenerator {
 
         
         return group;
+    }
+
+    public List<IGeneratorParameter> getParameters() {
+        return Collections.emptyList();
     }
 }
