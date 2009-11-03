@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Metaprint2d
 Bundle-SymbolicName: net.bioclipse.metaprint2d;singleton:=true
-Bundle-Version: 1.0.0.v20090929
+Bundle-Version: 1.0.0.v20091103
 Bundle-Activator: net.bioclipse.metaprint2d.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
