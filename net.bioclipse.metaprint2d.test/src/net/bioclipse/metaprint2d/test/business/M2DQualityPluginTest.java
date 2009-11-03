@@ -10,7 +10,7 @@
  ******************************************************************************/
 package net.bioclipse.metaprint2d.test.business;
 
- import static org.junit.Assert.*;
+  import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +25,7 @@ import net.bioclipse.cdk.business.Activator;
 import net.bioclipse.cdk.business.ICDKManager;
 import net.bioclipse.cdk.domain.ICDKMolecule;
 import net.bioclipse.cdk.ui.sdfeditor.business.IMoleculeTableManager;
-import net.bioclipse.cdk.ui.sdfeditor.editor.SDFIndexEditorModel;
+import net.bioclipse.cdk.ui.sdfeditor.business.SDFIndexEditorModel;
 import net.bioclipse.cdkdebug.business.ICDKDebugManager;
 import net.bioclipse.core.business.BioclipseException;
 import net.bioclipse.jobs.BioclipseJob;
