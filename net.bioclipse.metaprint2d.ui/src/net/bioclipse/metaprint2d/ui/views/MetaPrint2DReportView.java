@@ -10,6 +10,8 @@
  ******************************************************************************/
 package net.bioclipse.metaprint2d.ui.views;
 
+import net.bioclipse.cdk.jchempaint.editor.JChemPaintEditor;
+import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
 import net.bioclipse.metaprint2d.ui.Activator;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.bioclipse.metaprint2d.ui.model.MetaPrint2DCalculation;
@@ -148,6 +150,15 @@ public class MetaPrint2DReportView extends ViewPart implements IPartListener2{
 	
 		//Look up in manager the m2dcalculation
 		MetaPrint2DCalculation m2calc =null;
+		if ( part instanceof MultiPageMoleculesEditorPart ) {
+		    MultiPageMoleculesEditorPart jcpmulti = (MultiPageMoleculesEditorPart) part;
+        if (jcpmulti.isJCPVisible()){
+            Object obj = jcpmulti.getAdapter(JChemPaintEditor.class);
+            if (obj!= null){
+                part = (JChemPaintEditor)obj;
+            }
+        }
+    }
 		if (m2d.getCalculationMap().containsKey(part)){
 			m2calc = m2d.getCalculationMap().get(part);
 		}else{
@@ -187,9 +198,15 @@ public class MetaPrint2DReportView extends ViewPart implements IPartListener2{
 	}
 	
 	public void refresh(){
-		IEditorPart ePart=PlatformUI.getWorkbench().
-		getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		visitEditor(ePart);
+	    if (PlatformUI.getWorkbench()==null) return;
+      if (PlatformUI.getWorkbench().getActiveWorkbenchWindow()==null) return;
+      if (PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+              ==null) return;
+      if (PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+              .getActiveEditor()==null) return;
+      IEditorPart ePart=PlatformUI.getWorkbench().
+      getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+      visitEditor(ePart);
 	}
 
 	public void partActivated(IWorkbenchPartReference partRef) {
