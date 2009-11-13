@@ -183,7 +183,7 @@ public class MetaPrint2DHandler extends AbstractHandler {
         
 
         ICDKMolecule cdkmol=jcp.getCDKMolecule();
-      logger.debug("Execute found AC: " + jcp.getCDKMolecule().getAtomContainer());
+//      logger.debug("Execute found AC: " + jcp.getCDKMolecule().getAtomContainer());
 
 
         //Get previous result from m2d in a map editor -> m2dcalculation
