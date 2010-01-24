@@ -23,7 +23,7 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
    <item
          title="Step 2: Open a chemical structure">
       <description>
-         In the Bioclipse Navigator, double-click a chemical structure to open it in the chemical editor. It is also possible to edit molecules.
+         In the Bioclipse Navigator, double-click a 2D chemical structure to open it in the 2D chemical editor. Running MetaPrint2D on 3D molecules is currently not supported.
       </description>
     <action
 			pluginId="net.bioclipse.scripting.ui"
@@ -83,8 +83,8 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
       <item 
          title="Step 7: Switch between tabs in the Molecules Table">
       <description>
-         Select one of the structures in the MoleculesTable and then click the tab <b>2D-structure</b> at the bottom of the editor. 
-         Here you can edit the molecule and switch back to the tab <b>Molecules</b> as desired.
+         Select one of the structures in the MoleculesTable and then click the tab <b>Single Molecule</b> at the bottom of the editor. 
+         Here you can edit the molecule and switch back to the tab <b>Table</b> as desired.
       </description>
    </item>
       <item 
