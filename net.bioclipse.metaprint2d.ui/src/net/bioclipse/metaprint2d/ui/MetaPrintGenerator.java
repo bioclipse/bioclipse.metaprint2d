@@ -27,6 +27,7 @@ import org.openscience.cdk.renderer.elements.IRenderingElement;
 import org.openscience.cdk.renderer.elements.OvalElement;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.IGeneratorParameter;
+import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
 
 
 public class MetaPrintGenerator implements IGenerator {
@@ -74,7 +75,8 @@ public class MetaPrintGenerator implements IGenerator {
                     .getColorByNormValue( mres );
 
                     if(drawColor != null){
-                        if (model.getIsCompact() || renderSolid){
+                        if (model.getRenderingParameter( CompactAtom.class ).getValue()
+                                        || renderSolid){
                             group.add( new OvalElement( atom.getPoint2d().x,
                                                         atom.getPoint2d().y,
                                                         circleRadius,true, drawColor ));
