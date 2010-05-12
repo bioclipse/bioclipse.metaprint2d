@@ -32,6 +32,7 @@ import net.sf.metaprint2d.MetaPrintResult;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.RendererModel;
+import org.openscience.cdk.renderer.RendererModel.ColorHash;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
 import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.AtomColorer;
@@ -136,7 +137,7 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
         HashMap<IAtom, String> currentToolTip=new HashMap<IAtom, String>();
 
         //Color by metaprint
-        model.getColorHash().clear();
+        model.getRenderingParameter( ColorHash.class ).getValue().clear();
         for (int i=0; i< ac.getAtomCount(); i++){
             //            Atom metat=metamol.getAtom( i );
             MetaPrintResult res=scores.get(i);
