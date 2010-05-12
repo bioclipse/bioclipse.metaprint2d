@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j
 Bundle-Vendor: The Bioclispe Team
 Bundle-ClassPath: .,
  jars/metaprint2d-calc-1.0.jar,
