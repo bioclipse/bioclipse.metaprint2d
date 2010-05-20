@@ -26,6 +26,7 @@ import net.bioclipse.core.business.BioclipseException;
 import net.bioclipse.metaprint2d.Metaprinter;
 import net.bioclipse.metaprint2d.ui.Activator;
 import net.bioclipse.metaprint2d.ui.Metaprint2DConstants;
+import net.bioclipse.metaprint2d.ui.MetaPrintGenerator.MetaPrintVisibleParameter;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.bioclipse.metaprint2d.ui.model.MetaPrint2DCalculation;
 import net.bioclipse.metaprint2d.ui.views.MetaPrint2DReportView;
@@ -222,6 +223,11 @@ public class MetaPrint2DHandler extends AbstractHandler {
 
         //Turn on contributed generators
         jcp.getWidget().setUseExtensionGenerators( true );
+        
+        jcp.getWidget().getRenderer2DModel().
+               getRenderingParameter( MetaPrintVisibleParameter.class )
+               .setValue( true );
+
 
         //manually update jcpeditor
         jcp.update();

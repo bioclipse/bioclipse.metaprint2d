@@ -17,6 +17,7 @@ import net.bioclipse.cdk.ui.sdfeditor.editor.MoleculesEditor;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
 import net.bioclipse.metaprint2d.ui.Activator;
 import net.bioclipse.metaprint2d.ui.Metaprint2DConstants;
+import net.bioclipse.metaprint2d.ui.MetaPrintGenerator.MetaPrintVisibleParameter;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.bioclipse.metaprint2d.ui.views.MetaPrint2DReportView;
 
@@ -58,9 +59,14 @@ public class ClearMetaPrint2DHandler extends AbstractHandler implements IHandler
 
         //Turn of generators
 //        jcpeditor.getWidget().setUseExtensionGenerators( false );
+        
+        jcpeditor.getWidget().getRenderer2DModel().getRenderingParameter( MetaPrintVisibleParameter.class ).setValue( false );
 
+        //TODO: use this later
+//        jcpeditor.setMoleculeProperty( key, value )
         IMetaPrint2DManager m2d = Activator.getDefault().getMetaPrint2DManager();
         m2d.clear( jcpeditor.getCDKMolecule());
+        //Above does not work
         
         //manually update jcpeditor
         jcpeditor.update();

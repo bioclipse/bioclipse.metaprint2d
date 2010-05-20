@@ -11,6 +11,7 @@
 package net.bioclipse.metaprint2d.ui;
 
  import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,17 +25,36 @@ import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.elements.ElementGroup;
 import org.openscience.cdk.renderer.elements.IRenderingElement;
+import org.openscience.cdk.renderer.elements.IRenderingVisitor;
 import org.openscience.cdk.renderer.elements.OvalElement;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
+import org.openscience.cdk.renderer.generators.BasicBondGenerator.BondWidth;
+import org.openscience.cdk.renderer.generators.parameter.AbstractGeneratorParameter;
 
 
 public class MetaPrintGenerator implements IGenerator {
 
+    public static class MetaPrintVisibleParameter extends
+    AbstractGeneratorParameter<Boolean> {
+        public Boolean getDefault() {
+            return true;
+        }
+    }
+    private IGeneratorParameter<Boolean> visibleGenerator= new MetaPrintVisibleParameter();
+
+    
     public MetaPrintGenerator() {
 
     }
+    
+    private static final IRenderingElement emptyElement = 
+        new IRenderingElement() {
+        @Override
+        public void accept( IRenderingVisitor v ) {
+        }
+    };
     
     /**
      * Set up the colored M2D circles based on calculated properties
@@ -43,6 +63,9 @@ public class MetaPrintGenerator implements IGenerator {
                                        RendererModel model ) {
 
 //        System.out.println("Generator found AC: " + ac);
+        
+        if (!visibleGenerator.getValue())
+            return emptyElement;
 
         ElementGroup group = new ElementGroup();
         Object o = ac.getProperty( Metaprint2DConstants.METAPRINT_RESULT_PROPERTY );
@@ -109,6 +132,8 @@ public class MetaPrintGenerator implements IGenerator {
     }
 
     public List<IGeneratorParameter<?>> getParameters() {
-        return Collections.emptyList();
+        List<IGeneratorParameter<?>> lst=new ArrayList<IGeneratorParameter<?>>();
+        lst.add(visibleGenerator);
+        return lst;
     }
 }
