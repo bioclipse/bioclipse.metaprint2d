@@ -1,5 +1,6 @@
 package net.bioclipse.metaprint2d.ds;
 
+import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import net.bioclipse.ds.model.DSException;
 import net.bioclipse.ds.model.ITestResult;
 import net.bioclipse.ds.model.result.RGBMatch;
 import net.bioclipse.metaprint2d.ui.Activator;
+import net.bioclipse.metaprint2d.ui.MetaPrint2DHelper;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.sf.metaprint2d.MetaPrintResult;
 
@@ -30,13 +32,19 @@ public class MetaPrint2DMatcher extends AbstractDSTest{
 //            List<MetaPrintResult> m2dres = m2d.calculate( cdkmol);
             RGBMatch match=new RGBMatch( "MetaPrint2D",ITestResult.INFORMATIVE);
             
+            List<MetaPrintResult> res = m2d.calculate( cdkmol );
             
-            for (IAtom atom : cdkmol.getAtomContainer().atoms()){
-//                match.putAtomColor( atom, color );
+            assert(res.size()==cdkmol.getAtomContainer().getAtomCount());
+            
+            for (int i = 0; i< res.size(); i++){
+                IAtom atom = cdkmol.getAtomContainer().getAtom( i );
+                Color color=MetaPrint2DHelper.getColorByNormValue( res.get( i ) );
+                match.putAtomColor( atom, color );
             }
-            
+
+            //We currently do not use properties
 //            match.writeResultsAsProperties(cdkmol.getAtomContainer(), 
-//                                           net.bioclipse.ds.cpdb.signatures.Activator.CPDB_RESULT_PROPERTY);
+//            net.bioclipse.metaprint2d.ds.Activator.METAPRINT2D_RESULT_PROPERTY);
 
             
             

@@ -11,6 +11,9 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "net.bioclipse.metaprint2d.ds";
 
+	//Property for results
+  public static final String METAPRINT2D_RESULT_PROPERTY="metaprint2d.property";
+	
 	// The shared instance
 	private static Activator plugin;
 	
