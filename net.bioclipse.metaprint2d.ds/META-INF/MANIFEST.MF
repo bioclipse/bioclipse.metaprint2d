@@ -17,4 +17,4 @@ Require-Bundle: org.eclipse.ui,
  net.bioclipse.metaprint2d.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j
