@@ -34,13 +34,15 @@ import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.RendererModel.ColorHash;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
-import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.AtomColorer;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.AtomRadius;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactShape;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.KekuleStructure;
-import org.openscience.cdk.renderer.generators.BasicSceneGenerator.BackGroundColor;
+import org.openscience.cdk.renderer.generators.BasicAtomGenerator.ShowExplicitHydrogens;
+import org.openscience.cdk.renderer.generators.BasicSceneGenerator.BackgroundColor;
+import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator.ShowAtomTypeNames;
+import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator.ShowImplicitHydrogens;
 
 public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator{
 
@@ -103,9 +105,9 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
 
         //Configure JCP
         model.getRenderingParameter( CompactAtom.class ).setValue( true );
-        model.setShowAtomTypeNames( false );
-        model.setShowImplicitHydrogens( false );
-        model.setShowExplicitHydrogens(  false );
+        model.setRenderingParameter( ShowAtomTypeNames.class, false );
+        model.setRenderingParameter( ShowImplicitHydrogens.class, false);
+        model.setRenderingParameter( ShowExplicitHydrogens.class, false);
         model.setToolTipTextMap( currentToolTip );
                model.getRenderingParameter( AtomRadius.class ).setValue( 0.0 );
         //       model.setCompactShape(RenderingParameters.AtomShape.OVAL);
@@ -175,14 +177,14 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
         model.getRenderingParameter( AtomColorer.class ).setValue(new Metaprint2DPropertyColorer());
 
         //Configure JCP
-        setRendererParameter( model, BackGroundColor.class, bondcolor);
-        setRendererParameter( model, KekuleStructure.class,  true );
-        model.setShowAtomTypeNames( false );
-        model.setShowImplicitHydrogens( false );
-        model.setShowExplicitHydrogens(  false );
+        model.setRenderingParameter( BackgroundColor.class, bondcolor);
+        model.setRenderingParameter( KekuleStructure.class,  true );
+        model.setRenderingParameter( ShowAtomTypeNames.class, false);
+        model.setRenderingParameter( ShowImplicitHydrogens.class, false);
+        model.setRenderingParameter( ShowExplicitHydrogens.class, false);
         model.setToolTipTextMap( currentToolTip );
-        setRendererParameter( model, AtomRadius.class, 8d );
-        setRendererParameter( model, CompactShape.class,
+        model.setRenderingParameter( AtomRadius.class, 8d );
+        model.setRenderingParameter( CompactShape.class,
                               BasicAtomGenerator.Shape.OVAL);
 
         //Update drawing
@@ -191,12 +193,6 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
         System.out.println("M2d color calculator processing mol: " + cdkmol + " finished");
 
 
-    }
-
-    private <T extends IGeneratorParameter<S>, S>
-      void setRendererParameter(RendererModel model, Class<T > param, S value) {
-        T parameter = model.getRenderingParameter( param );
-        parameter.setValue( value );
     }
 
 }

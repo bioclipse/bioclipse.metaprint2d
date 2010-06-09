@@ -30,7 +30,7 @@ import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
 
 
-public class MetaPrintGenerator implements IGenerator {
+public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
 
     public MetaPrintGenerator() {
 
