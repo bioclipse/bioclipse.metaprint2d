@@ -99,17 +99,17 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
         }
 
         //Set the PropertyColorer as colorer for the renderermodel
-        AtomColorer atomColorer = model.getRenderingParameter( AtomColorer.class );
+        AtomColorer atomColorer = model.getParameter(AtomColorer.class );
         if(!(atomColorer.getValue() instanceof Metaprint2DPropertyColorer))
             atomColorer.setValue( new Metaprint2DPropertyColorer() );
 
         //Configure JCP
-        model.getRenderingParameter( CompactAtom.class ).setValue( true );
-        model.setRenderingParameter( ShowAtomTypeNames.class, false );
-        model.setRenderingParameter( ShowImplicitHydrogens.class, false);
-        model.setRenderingParameter( ShowExplicitHydrogens.class, false);
+        model.set( CompactAtom.class ,true );
+        model.set( ShowAtomTypeNames.class, false );
+        model.set( ShowImplicitHydrogens.class, false);
+        model.set( ShowExplicitHydrogens.class, false);
         model.setToolTipTextMap( currentToolTip );
-               model.getRenderingParameter( AtomRadius.class ).setValue( 0.0 );
+               model.set( AtomRadius.class , 0.0 );
         //       model.setCompactShape(RenderingParameters.AtomShape.OVAL);
 
         //Update drawing
@@ -139,7 +139,7 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
         HashMap<IAtom, String> currentToolTip=new HashMap<IAtom, String>();
 
         //Color by metaprint
-        model.getRenderingParameter( ColorHash.class ).getValue().clear();
+        model.getParameter( ColorHash.class ).getValue().clear();
         for (int i=0; i< ac.getAtomCount(); i++){
             //            Atom metat=metamol.getAtom( i );
             MetaPrintResult res=scores.get(i);
@@ -174,18 +174,17 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
 
         }
 
-        model.getRenderingParameter( AtomColorer.class ).setValue(new Metaprint2DPropertyColorer());
+        model.getParameter( AtomColorer.class ).setValue(new Metaprint2DPropertyColorer());
 
         //Configure JCP
-        model.setRenderingParameter( BackgroundColor.class, bondcolor);
-        model.setRenderingParameter( KekuleStructure.class,  true );
-        model.setRenderingParameter( ShowAtomTypeNames.class, false);
-        model.setRenderingParameter( ShowImplicitHydrogens.class, false);
-        model.setRenderingParameter( ShowExplicitHydrogens.class, false);
+        model.set( BackgroundColor.class, bondcolor);
+        model.set( KekuleStructure.class,  true );
+        model.set( ShowAtomTypeNames.class, false);
+        model.set( ShowImplicitHydrogens.class, false);
+        model.set( ShowExplicitHydrogens.class, false);
         model.setToolTipTextMap( currentToolTip );
-        model.setRenderingParameter( AtomRadius.class, 8d );
-        model.setRenderingParameter( CompactShape.class,
-                              BasicAtomGenerator.Shape.OVAL);
+        model.set( AtomRadius.class, 8d );
+        model.set( CompactShape.class, BasicAtomGenerator.Shape.OVAL);
 
         //Update drawing
         model.fireChange();

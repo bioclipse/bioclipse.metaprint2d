@@ -75,8 +75,7 @@ public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
                     .getColorByNormValue( mres );
 
                     if(drawColor != null){
-                        if (model.getRenderingParameter( CompactAtom.class ).getValue()
-                                        || renderSolid){
+                        if (model.get( CompactAtom.class ) || renderSolid){
                             group.add( new OvalElement( atom.getPoint2d().x,
                                                         atom.getPoint2d().y,
                                                         circleRadius,true, drawColor ));
