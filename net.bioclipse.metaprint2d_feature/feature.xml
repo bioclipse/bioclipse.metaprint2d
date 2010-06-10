@@ -2,7 +2,7 @@
 <feature
       id="net.bioclipse.metaprint2d_feature"
       label="MetaPrint2D"
-      version="1.0.0.v20100127"
+      version="1.0.0.v20100610"
       provider-name="The Bioclipse Team"
       plugin="net.bioclipse.metaprint2d.ui">
 
