@@ -33,9 +33,11 @@ import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.RendererModel.ColorHash;
+import org.openscience.cdk.renderer.color.IAtomColorer;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.AtomColorer;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.AtomRadius;
+import org.openscience.cdk.renderer.generators.BasicAtomGenerator.ColorByType;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactShape;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.KekuleStructure;
@@ -98,12 +100,21 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
 
         }
 
-        //Set the PropertyColorer as colorer for the renderermodel
-        AtomColorer atomColorer = model.getParameter(AtomColorer.class );
-        if(!(atomColorer.getValue() instanceof Metaprint2DPropertyColorer))
-            atomColorer.setValue( new Metaprint2DPropertyColorer() );
-
         //Configure JCP
+        IAtomColorer c = new IAtomColorer() {
+			@Override
+			public Color getAtomColor(IAtom atom, Color defaultColor) {
+				return Color.BLACK;
+			}
+			@Override
+			public Color getAtomColor(IAtom atom) {
+				return Color.BLACK;
+			}
+		};
+
+        model.set(AtomColorer.class,c);
+        model.set(ColorByType.class,true);
+
         model.set( CompactAtom.class ,true );
         model.set( ShowAtomTypeNames.class, false );
         model.set( ShowImplicitHydrogens.class, false);
@@ -117,81 +128,5 @@ public class MetaPrint2DAtomColorConfigurator implements IRenderer2DConfigurator
 
     }
 
-
-    public void configure(RendererModel model, ICDKMolecule cdkmol) {
-        System.out.println("M2d color calculator processing mol: " + cdkmol);
-
-        //Get the managers via OSGI
-        IMetaPrint2DManager m2d = Activator.getDefault().getMetaPrint2DManager();
-
-        IAtomContainer ac=cdkmol.getAtomContainer();
-
-        List<MetaPrintResult> scores=null;
-        try {
-            scores = m2d.calculate(cdkmol);
-        } catch (BioclipseException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
-        //Store tooltips Atom -> String
-        HashMap<IAtom, String> currentToolTip=new HashMap<IAtom, String>();
-
-        //Color by metaprint
-        model.getParameter( ColorHash.class ).getValue().clear();
-        for (int i=0; i< ac.getAtomCount(); i++){
-            //            Atom metat=metamol.getAtom( i );
-            MetaPrintResult res=scores.get(i);
-            Color color=Metaprinter.getColorByMetprint(res);
-            //            System.out.println("Atom: " + i + " Color:" + color);
-            if (color !=null){
-                //For IAtomColorer
-                ac.getAtom( i ).setProperty( Metaprint2DConstants.COLOR_PROPERTY, color );
-                System.out.println("Coloring atom: " + i + " to " + color.toString());
-
-                //For Background
-                //                model.getColorHash().put(ac.getAtom( i ), color);
-
-            }
-            else{
-                //For IAtomColorer
-                ac.getAtom( i ).setProperty( Metaprint2DConstants.COLOR_PROPERTY, Metaprinter.BLACK_COLOR );
-                System.out.println("Coloring atom: " + i + " to " + Metaprinter.BLACK_COLOR);
-
-                //For Background
-                //                model.getColorHash().put(ac.getAtom( i ), Metaprinter.WHITE_COLOR);
-
-            }
-
-            //Add tooltip
-            StringWriter sw=new StringWriter();
-            PrintWriter pw=new PrintWriter(sw);
-            pw.printf( "%d/%d %1.2f" , res.getReactionCentreCount(), res.getSubstrateCount(), res.getNormalisedRatio());
-            String tt=sw.getBuffer().toString();
-            //            String s= String.format( "%1$/%2$ %3$.2f", res.getReactionCentreCount(), res.getSubstrateCount(), res.getNormalisedRatio() );
-            currentToolTip.put( ac.getAtom( i ), tt );
-
-        }
-
-        model.getParameter( AtomColorer.class ).setValue(new Metaprint2DPropertyColorer());
-
-        //Configure JCP
-        model.set( BackgroundColor.class, bondcolor);
-        model.set( KekuleStructure.class,  true );
-        model.set( ShowAtomTypeNames.class, false);
-        model.set( ShowImplicitHydrogens.class, false);
-        model.set( ShowExplicitHydrogens.class, false);
-        model.setToolTipTextMap( currentToolTip );
-        model.set( AtomRadius.class, 8d );
-        model.set( CompactShape.class, BasicAtomGenerator.Shape.OVAL);
-
-        //Update drawing
-        model.fireChange();
-
-        System.out.println("M2d color calculator processing mol: " + cdkmol + " finished");
-
-
-    }
 
 }
