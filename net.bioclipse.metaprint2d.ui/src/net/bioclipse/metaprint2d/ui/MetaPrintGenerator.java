@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * Copyright (c) 2009 Ola Spjuth.
+ * Copyright (c) 2009-2010 Ola Spjuth.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,6 @@ package net.bioclipse.metaprint2d.ui;
 
  import java.awt.Color;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,15 +28,17 @@ import org.openscience.cdk.renderer.elements.OvalElement;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
-import org.openscience.cdk.renderer.generators.BoundsGenerator.BoundsColor;
 import org.openscience.cdk.renderer.generators.parameter.AbstractGeneratorParameter;
 
-
+/**
+ * A Genrator responsible for drawing MetaPrint2D circles in JCP
+ * @author ola
+ *
+ */
 public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
 
 	/**
-	 * The color of the box drawn at the bounds of a
-	 * molecule, molecule set, or reaction.
+	 * Adds the ability to turn the generator on/off via a Handler
 	 */
     public static class Visibility extends
     AbstractGeneratorParameter<Boolean> {
