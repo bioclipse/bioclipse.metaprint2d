@@ -41,7 +41,7 @@ public class MetaprintPreferenceInitializer extends AbstractPreferenceInitialize
     	store.setDefault(MetaprintPrefs.METAPRINT_ATOMTYPING, MetaprintPrefs.CDK_ATOMTYPING);
 
       store.setDefault(MetaprintPrefs.CIRCLE_RADIUS, "4");
-      store.setDefault(MetaprintPrefs.RENDER_SOLID_CIRCLES, false);
+      store.setDefault(MetaprintPrefs.RENDER_SOLID_CIRCLES, true);
       store.setDefault(MetaprintPrefs.RENDER_MISSING_GREY, false);
 
     	
