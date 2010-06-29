@@ -25,6 +25,7 @@ import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
 import net.bioclipse.core.business.BioclipseException;
 import net.bioclipse.metaprint2d.Metaprinter;
 import net.bioclipse.metaprint2d.ui.Activator;
+import net.bioclipse.metaprint2d.ui.MetaPrintGenerator;
 import net.bioclipse.metaprint2d.ui.Metaprint2DConstants;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.bioclipse.metaprint2d.ui.model.MetaPrint2DCalculation;
@@ -58,13 +59,14 @@ public class MetaPrint2DHandler extends AbstractHandler {
     	//Make sure we are called from a supported editor
         IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
         .getActivePage().getActiveEditor();
-        
+
         if (event.getCommand().getId().equals( TOGGLE_COMMAND_ID )){
             shouldAutorun = !shouldAutorun;
             if (!shouldAutorun)
                 return null;
         }
         
+        MetaPrintGenerator.setVisible(true);
 
         if (part instanceof net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart) {
             return executeInMolTableEditor(part);
@@ -74,6 +76,7 @@ public class MetaPrint2DHandler extends AbstractHandler {
             handleChangedListeners(jcp);
             return executeInJCP(jcp);
         }
+
 
         //Not supported, just finish (should not happen)
         logger.error("M2D called from unsupported editor: " + part);

@@ -11,6 +11,7 @@
 package net.bioclipse.metaprint2d.ui;
 
  import java.awt.Color;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +29,29 @@ import org.openscience.cdk.renderer.elements.OvalElement;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator.CompactAtom;
+import org.openscience.cdk.renderer.generators.BoundsGenerator.BoundsColor;
+import org.openscience.cdk.renderer.generators.parameter.AbstractGeneratorParameter;
 
 
 public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
 
-    public MetaPrintGenerator() {
+	/**
+	 * The color of the box drawn at the bounds of a
+	 * molecule, molecule set, or reaction.
+	 */
+    public static class Visibility extends
+    AbstractGeneratorParameter<Boolean> {
+        public Boolean getDefault() {
+            return true;
+        }
+    }
+    private static IGeneratorParameter<Boolean> visible = new Visibility();
+
+	public static void setVisible(Boolean visible1) {
+		visible.setValue(visible1);
+	}
+
+	public MetaPrintGenerator() {
 
     }
     
@@ -41,11 +60,14 @@ public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
      */
     public IRenderingElement generate( IAtomContainer ac,
                                        RendererModel model ) {
+    	
 
-//        System.out.println("Generator found AC: " + ac);
+//        System.out.println("M2D Generator found AC: " + ac);
 
         ElementGroup group = new ElementGroup();
-        Object o = ac.getProperty( Metaprint2DConstants.METAPRINT_RESULT_PROPERTY );
+    	if (visible.getValue()==false) return group;
+
+    	Object o = ac.getProperty( Metaprint2DConstants.METAPRINT_RESULT_PROPERTY );
         if (o==null) return group;
         
         //Read prefs for rendering params and compute real values
@@ -108,6 +130,10 @@ public class MetaPrintGenerator implements IGenerator<IAtomContainer> {
     }
 
     public List<IGeneratorParameter<?>> getParameters() {
-        return Collections.emptyList();
+        return Arrays.asList(
+                new IGeneratorParameter<?>[] {
+                	visible
+                }
+            );
     }
 }

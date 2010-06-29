@@ -16,6 +16,7 @@ import net.bioclipse.cdk.jchempaint.view.JChemPaintView;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MoleculesEditor;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
 import net.bioclipse.metaprint2d.ui.Activator;
+import net.bioclipse.metaprint2d.ui.MetaPrintGenerator;
 import net.bioclipse.metaprint2d.ui.Metaprint2DConstants;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 import net.bioclipse.metaprint2d.ui.views.MetaPrint2DReportView;
@@ -47,6 +48,8 @@ public class ClearMetaPrint2DHandler extends AbstractHandler implements IHandler
         else if ( part instanceof JChemPaintEditor ) {
             executeInJCP(part);
         }
+        
+        MetaPrintGenerator.setVisible(false);
 
         updateLinkedViews();
         
