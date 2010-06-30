@@ -19,6 +19,7 @@ import java.util.List;
 import net.sf.metaprint2d.MetaPrintResult;
 import net.bioclipse.cdk.domain.ICDKMolecule;
 import net.bioclipse.cdk.jchempaint.editor.JChemPaintEditor;
+import net.bioclipse.cdk.jchempaint.view.ChoiceGenerator;
 import net.bioclipse.cdk.jchempaint.view.JChemPaintView;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MoleculesEditor;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
@@ -41,9 +42,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.RendererModel;
+import org.openscience.cdk.renderer.generators.IGenerator;
+import org.openscience.cdk.renderer.generators.IGeneratorParameter;
 
 public class MetaPrint2DHandler extends AbstractHandler {
 
@@ -57,8 +61,7 @@ public class MetaPrint2DHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
     	//Make sure we are called from a supported editor
-        IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-        .getActivePage().getActiveEditor();
+        IEditorPart editor = HandlerUtil.getActiveEditor(event);
 
         if (event.getCommand().getId().equals( TOGGLE_COMMAND_ID )){
             shouldAutorun = !shouldAutorun;
@@ -66,20 +69,24 @@ public class MetaPrint2DHandler extends AbstractHandler {
                 return null;
         }
         
+        //Turn off all external generators
+        turnOffAllExternalGenerators(editor);
+        
+        //Turn on M2D Generator
         MetaPrintGenerator.setVisible(true);
 
-        if (part instanceof net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart) {
-            return executeInMolTableEditor(part);
+        if (editor instanceof net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart) {
+            return executeInMolTableEditor(editor);
         }
-        else if ( part instanceof JChemPaintEditor ) {
-            JChemPaintEditor jcp=(JChemPaintEditor)part;
+        else if ( editor instanceof JChemPaintEditor ) {
+            JChemPaintEditor jcp=(JChemPaintEditor)editor;
             handleChangedListeners(jcp);
             return executeInJCP(jcp);
         }
 
 
         //Not supported, just finish (should not happen)
-        logger.error("M2D called from unsupported editor: " + part);
+        logger.error("M2D called from unsupported editor: " + editor);
 		return null;
 
 	} 
@@ -350,5 +357,42 @@ public class MetaPrint2DHandler extends AbstractHandler {
         }
     }
 
+    private void turnOffAllExternalGenerators(IEditorPart editor) {
+    	//Switch off all other DS-generators!
+    	List<IGenerator<IAtomContainer>> generators = ChoiceGenerator.getGeneratorsFromExtension();
 
+    	JChemPaintEditor jcp=getJCPfromEditor(editor);
+    	if (jcp==null) return;
+
+    	RendererModel model = jcp.getWidget().getRenderer2DModel();
+
+    	for(IGenerator generator: generators) {
+    		List<IGeneratorParameter<?>> params = generator.getParameters();
+    		if(params.isEmpty()) continue;
+    		for (IGeneratorParameter param : params){
+    			if (param.getDefault() instanceof Boolean) {
+    				IGeneratorParameter<Boolean> bp= (IGeneratorParameter<Boolean>)param;
+    				model.set(bp.getClass(), false);
+    			}
+    		}
+    	}				
+    }
+    
+    private JChemPaintEditor getJCPfromEditor(IEditorPart editor) {
+
+    	if (editor instanceof JChemPaintEditor) {
+    		return (JChemPaintEditor)editor;			
+    	}
+    	else if (editor instanceof MultiPageMoleculesEditorPart) {
+    		MultiPageMoleculesEditorPart moltable = (MultiPageMoleculesEditorPart) editor;
+    		if (moltable.isJCPVisible()){
+				Object obj = moltable.getSelectedPage();
+				if (obj instanceof JChemPaintEditor) {
+					return (JChemPaintEditor) obj;
+				}
+    		}
+    	}
+
+    	return null;
+	}
 }
