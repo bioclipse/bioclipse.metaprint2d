@@ -10,6 +10,7 @@
  ******************************************************************************/
 package net.bioclipse.metaprint2d.ui;
 
+
  import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,16 +19,28 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import com.sun.corba.se.impl.oa.poa.AOMEntry;
 
 import net.bioclipse.metaprint2d.ui.prefs.MetaprintPrefs;
 import net.sf.metaprint2d.MetaPrintResult;
 
-
+/**
+ * Helper class for transforming results, properties, colors.
+ * 
+ * @author ola
+ *
+ */
 public class MetaPrint2DHelper {
 
+    private static final Logger logger = Logger.getLogger(MetaPrint2DHelper.class);
+
+	public static int LOW=0x0;
+	public static int MEDIUM=0x1;
+	public static int HIGH=0x2;
+	public static int ERROR=0x9;
+
+	
     public static List<MetaPrintResult> getResultFromProperty(String propString){
 
         List<MetaPrintResult> reslist=new ArrayList<MetaPrintResult>();
@@ -161,5 +174,37 @@ public class MetaPrint2DHelper {
         return null;
 
     }
+    
+    public static int getIntResultByNormValue( MetaPrintResult mres ) {
+
+        double normval = mres.getNormalisedRatio();
+        
+        if (normval>=0.15 && normval<0.33){
+            return LOW;
+        }
+        else if (normval>=0.33 && normval<0.66){
+            return MEDIUM;
+        }
+        else if (normval>=0.66){
+            return HIGH;
+        }
+        
+        return ERROR;
+
+    }
+    
+	public static Color getMetaPrint2DColor(int resValue) {
+		
+		if (resValue==LOW)
+			return Color.GREEN;
+		if (resValue==MEDIUM)
+			return Color.ORANGE;
+		if (resValue==HIGH)
+			return Color.RED;
+		
+//		logger.error("Unsupported value for MetaPrint2D: " + resValue);
+		return null;
+	}
+
 
 }

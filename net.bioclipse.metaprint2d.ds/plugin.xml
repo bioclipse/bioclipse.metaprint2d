@@ -2,20 +2,21 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+<extension
+       point="net.bioclipse.cdk.jchempaint.generator">
+    <generator
+          class="net.bioclipse.metaprint2d.ds.MetaPrint2D_DS_Generator">
+    </generator>
+ </extension>
+
    <extension
          point="net.bioclipse.decisionsupport">
-         
-         <endpoint
-               id="net.bioclipse.ds.metaprint2d"
-               description="MetaPrint2D site-of-metabolism prediction"
-               icon="icons/metaprint2d.gif"
-               name="MetaPrint2D">
-         </endpoint>
          
       <test
             id="metaprint2d"
             name="MetaPrint2D"
-            endpoint="net.bioclipse.ds.metaprint2d"
+            icon="icons/metaprint2d.gif"
+            endpoint="net.bioclipse.ds.adme"
             class="net.bioclipse.metaprint2d.ds.MetaPrint2DMatcher"
             propertycalculator="MetaPrint2D"
             informative="true">
