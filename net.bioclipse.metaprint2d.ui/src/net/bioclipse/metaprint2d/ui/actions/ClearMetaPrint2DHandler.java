@@ -64,7 +64,7 @@ public class ClearMetaPrint2DHandler extends AbstractHandler implements IHandler
 
         IMetaPrint2DManager m2d = Activator.getDefault().getMetaPrint2DManager();
         m2d.clear( jcpeditor.getCDKMolecule());
-        
+        jcpeditor.setMoleculeProperty(Metaprint2DConstants.METAPRINT_RESULT_PROPERTY, null);
         //manually update jcpeditor
         jcpeditor.update();
 
