@@ -53,10 +53,10 @@ public class Metaprinter {
 //	private static final String DATAFILE_HUMAN = "/data/metab2008.1-human.bin";
 //	private static final String DATAFILE_RAT = "/data/metab2008.1-rat.bin";
 
-	 private static final String DATAFILE_ALL = "/data/metaprint2d-metab2008_1-all.bin";
-	  private static final String DATAFILE_DOG = "/data/metaprint2d-metab2008_1-dog.bin";
-	  private static final String DATAFILE_HUMAN = "/data/metaprint2d-metab2008_1-human.bin";
-	  private static final String DATAFILE_RAT = "/data/metaprint2d-metab2008_1-rat.bin";
+	 private static final String DATAFILE_ALL = "/data/EntireDB2005AllFields.rdf.bin";
+//	  private static final String DATAFILE_DOG = "/data/metaprint2d-metab2008_1-dog.bin";
+//	  private static final String DATAFILE_HUMAN = "/data/metaprint2d-metab2008_1-human.bin";
+//	  private static final String DATAFILE_RAT = "/data/metaprint2d-metab2008_1-rat.bin";
 
 	//Cache calculator
 	private static MetaPrintCalculator metaprint = null;
@@ -200,15 +200,15 @@ public class Metaprinter {
     	case ALL:
     		url = FileLocator.find( bundle, new Path(DATAFILE_ALL),null );
     		break;
-    	case DOG: 
-    		url = FileLocator.find( bundle, new Path(DATAFILE_DOG),null );
-    		break;
-    	case HUMAN: 
-    		url = FileLocator.find( bundle, new Path(DATAFILE_HUMAN),null );
-    		break;
-    	case RAT: 
-    		url = FileLocator.find( bundle, new Path(DATAFILE_RAT),null );
-    		break;
+//    	case DOG: 
+//    		url = FileLocator.find( bundle, new Path(DATAFILE_DOG),null );
+//    		break;
+//    	case HUMAN: 
+//    		url = FileLocator.find( bundle, new Path(DATAFILE_HUMAN),null );
+//    		break;
+//    	case RAT: 
+//    		url = FileLocator.find( bundle, new Path(DATAFILE_RAT),null );
+//    		break;
         }
     	
 		try {

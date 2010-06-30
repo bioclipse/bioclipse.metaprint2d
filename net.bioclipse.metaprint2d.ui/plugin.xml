@@ -159,7 +159,7 @@
     </menu>
  </menuContribution>
 
- <menuContribution
+ <!--menuContribution
     locationURI= "menu:net.bioclipse.metaprint2d?after=additions">
     <menu
        id="net.bioclipse.metaprint2d.species"
@@ -213,7 +213,7 @@
                 value="Rat">
         </parameter>
     </command>
-</menuContribution>
+</menuContribution-->
 
 
 
@@ -302,7 +302,7 @@
 		</visibleWhen>
     </command>
 
- <command
+ <!--command
             commandId="net.bioclipse.dropdown.radio"
             id="net.bioclipse.dropdown.menu.radio1"
             label="All"
@@ -361,7 +361,7 @@
 		<visibleWhen>
            <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
 		</visibleWhen>
-    </command>
+    </command-->
 
             <separator
                   name="additions"
