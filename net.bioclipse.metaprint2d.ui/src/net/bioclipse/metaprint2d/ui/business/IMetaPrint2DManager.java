@@ -59,7 +59,7 @@ public interface IMetaPrint2DManager extends IBioclipseManager{
      */
     @PublishedMethod( methodSummary = "Run MetaPrint2D on a molecule.",
                       params = "IMolecule molecule, " +
-    "storeResults: true if resutlts should be stored as properties in AC." )
+    "storeResults: true if results should be stored as properties in AC." )
     @Recorded
     public List<MetaPrintResult> calculate(IMolecule molecule, boolean storeResults) throws BioclipseException, InvocationTargetException;
 
@@ -112,7 +112,7 @@ public interface IMetaPrint2DManager extends IBioclipseManager{
     @PublishedMethod( methodSummary = "Run MetaPrint2D on a molecular file.",
                       params = "String path: points to a file comprising " +
                       "one or more molecules, " +
-    "storeResults: true if resutlts should be stored as properties in AC." )    
+    "storeResults: true if results should be stored as properties in AC." )    
     @Recorded
     public Map<IMolecule, List<MetaPrintResult>> calculate(String path, boolean storeResults)
     throws IOException, BioclipseException, CoreException, InvocationTargetException, CDKException;
@@ -140,7 +140,7 @@ public interface IMetaPrint2DManager extends IBioclipseManager{
      */
     @PublishedMethod( methodSummary = "Run MetaPrint2D on a list of IMolecules.",
                       params = "List<IMolecule> molecules: List of molecules, " +
-    "storeResults: true if resutlts should be stored as properties in AC." )
+    "storeResults: true if results should be stored as properties in AC." )
     @Recorded
     Map<IMolecule, List<MetaPrintResult>> calculate(List<? extends IMolecule> mols,
                                                     boolean storeResults) throws BioclipseException,
