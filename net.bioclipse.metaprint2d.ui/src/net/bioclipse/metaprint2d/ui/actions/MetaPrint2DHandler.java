@@ -23,7 +23,7 @@ import net.bioclipse.cdk.jchempaint.view.ChoiceGenerator;
 import net.bioclipse.cdk.jchempaint.view.JChemPaintView;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MoleculesEditor;
 import net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart;
-import net.bioclipse.core.business.BioclipseException;
+import net.bioclipse.core.api.BioclipseException;
 import net.bioclipse.metaprint2d.Metaprinter;
 import net.bioclipse.metaprint2d.ui.Activator;
 import net.bioclipse.metaprint2d.ui.MetaPrintGenerator;
