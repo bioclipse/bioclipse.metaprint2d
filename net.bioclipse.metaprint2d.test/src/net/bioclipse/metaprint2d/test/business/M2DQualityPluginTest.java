@@ -28,8 +28,8 @@ import net.bioclipse.cdk.ui.sdfeditor.business.IMoleculeTableManager;
 import net.bioclipse.cdk.ui.sdfeditor.business.SDFIndexEditorModel;
 import net.bioclipse.cdkdebug.business.ICDKDebugManager;
 import net.bioclipse.core.api.BioclipseException;
+import net.bioclipse.core.api.jobs.BioclipseJobUpdateHook;
 import net.bioclipse.jobs.BioclipseJob;
-import net.bioclipse.jobs.BioclipseJobUpdateHook;
 import net.bioclipse.metaprint2d.ui.MetaPrint2DProperty;
 import net.bioclipse.metaprint2d.ui.business.IMetaPrint2DManager;
 
