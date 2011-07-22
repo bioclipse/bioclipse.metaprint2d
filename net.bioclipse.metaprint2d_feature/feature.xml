@@ -32,6 +32,7 @@ License (LGPL).
 
    <requires>
       <import feature="net.bioclipse.chemoinformatics_feature" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="net.bioclipse.cdk.debug"/>
    </requires>
 
    <plugin
@@ -43,13 +44,6 @@ License (LGPL).
 
    <plugin
          id="net.bioclipse.metaprint2d.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="net.bioclipse.cdk.debug"
          download-size="0"
          install-size="0"
          version="0.0.0"
