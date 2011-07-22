@@ -24,7 +24,7 @@ public class MetaPrint2D_DS_Match extends AtomResultMatch{
     }
 
     @Override
-    public Class<? extends IGeneratorParameter<Map<Integer, Integer>>> getGeneratorAtomMap() {
-    	return (Class<? extends IGeneratorParameter<Map<Integer, Integer>>>)MetaPrint2D_DS_Generator.AtomMap.class;
+    public Class<? extends IGeneratorParameter<Map<Integer, Number>>> getGeneratorAtomMap() {
+    	return (Class<? extends IGeneratorParameter<Map<Integer, Number>>>)MetaPrint2D_DS_Generator.AtomMap.class;
     }
 }
