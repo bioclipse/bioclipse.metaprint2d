@@ -57,7 +57,7 @@ public class PluginTestMetaprint2dManager {
 
 	ICDKManager cdk=Activator.getDefault().getJavaCDKManager();
 	CDKDebugManager cdkdebug=new CDKDebugManager();
-	IMetaPrint2DManager m2d = new MetaPrint2DManager(cdk);
+	MetaPrint2DManager m2d = new MetaPrint2DManager(cdk);
 
 
   /*====================================================
