@@ -64,10 +64,13 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
 			class="net.bioclipse.scripting.ui.actions.ScriptAction"
 	        required="false"
 			param1="lst=cdk.createMoleculeList();"
-			param2="lst.add(cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;));"
-			param3="lst.add(cdk.fromSMILES(&quot;NN=C2NN=CC1=CC=CC=C12&quot;));"
-			param4="lst.add(cdk.fromSMILES(&quot;CNC1(CCCCC1(=O))C=2C=CC=CC=2Cl&quot;));"
-			param5="ui.open(lst);"
+			param2="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;));"
+			param3="lst.add(mol)"
+			param4="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;NN=C2NN=CC1=CC=CC=C12&quot;));"
+			param5="lst.add(mol)"
+			param6="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;CNC1(CCCCC1(=O))C=2C=CC=CC=2Cl&quot;));"
+			param7="lst.add(mol)"
+			param8="ui.open(lst);"
 			/>
    </item>
    <item
