@@ -30,13 +30,14 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
 			class="net.bioclipse.scripting.ui.actions.ScriptAction"
 	        required="false"
 			param1="mol=cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;)"
-			param2="ui.open(mol)"
+			param2="mol=cdk.generate2dCoordinates(mol)"
+			param3="ui.open(mol)"
 			/>
    </item>
    <item
          title="Step 3: Run MetaPrint2D">
       <description>
-         In the MetaPrint2D toolbar are several buttons. Click on the leftmost, which says "Execute MetaPrint2D on the active molecyle(s)" when hovered upon. 
+         In the MetaPrint2D toolbar are several buttons. Click on the leftmost, which says "Execute MetaPrint2D on the active molecule(s)" when hovered upon. 
       </description>
       <command
             required="false"
@@ -47,7 +48,7 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
          title="Step 4: Examine the results.">
       <description>
          MetaPrint2D visualizes the results in a normalized, relative fashion. This means the most likely atom to undergo metabolization is colored RED. Atoms colored ORANGE are moderately likely to undergo metabolization, atoms colored in GREEN are less likely, and atoms with no color have very low probability of metabolization starting in that place.<br/><br/>
-         Hover over the atoms to see detailed results on the form: Number of hits in the reaction centre set, the total number of hits, and the normalised ratio.         <br/><br/>
+         Hover over the atoms to see detailed results on the form: Number of hits in the reaction centre set, the total number of hits, and the normalized ratio.         <br/><br/>
          It is possible to edit the molecule and then executing MetaPrint2D again to see the updated result. If you like to turn on automatic recalculation, click on the icon marked with blue arrows saying "Turn on automatic MetaPrint2D calculation". After, edit the molecule and notice how coloring changes as you edit.
          
       </description>
@@ -63,10 +64,13 @@ In the top menu, select option <b>Window &gt; Open Perspective &gt; Other...</b>
 			class="net.bioclipse.scripting.ui.actions.ScriptAction"
 	        required="false"
 			param1="lst=cdk.createMoleculeList();"
-			param2="lst.add(cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;));"
-			param3="lst.add(cdk.fromSMILES(&quot;NN=C2NN=CC1=CC=CC=C12&quot;));"
-			param4="lst.add(cdk.fromSMILES(&quot;CNC1(CCCCC1(=O))C=2C=CC=CC=2Cl&quot;));"
-			param5="ui.open(lst);"
+			param2="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;CC(CCC1=CC=C(O)C=C1)NCCC=2C=CC(O)=C(O)C=2&quot;));"
+			param3="lst.add(mol)"
+			param4="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;NN=C2NN=CC1=CC=CC=C12&quot;));"
+			param5="lst.add(mol)"
+			param6="mol=cdk.generate2dCoordinates(cdk.fromSMILES(&quot;CNC1(CCCCC1(=O))C=2C=CC=CC=2Cl&quot;));"
+			param7="lst.add(mol)"
+			param8="ui.open(lst);"
 			/>
    </item>
    <item
