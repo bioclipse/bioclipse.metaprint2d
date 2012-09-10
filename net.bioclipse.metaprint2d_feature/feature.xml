@@ -3,11 +3,11 @@
       id="net.bioclipse.metaprint2d_feature"
       label="MetaPrint2D"
       version="2.5.0.qualifier"
-      provider-name="The Bioclipse Team"
+      provider-name="bioclipse.net"
       plugin="net.bioclipse.metaprint2d.ui">
 
    <description>
-      MetaPrint2D is a product to predict sites of metabolism in molecules based on Circular Fingerprints and a preprocessed Symyx Metabolite databse.
+      Site-of-metabolism prediction based on the method by Carlsson et al. (2010).
    </description>
 
    <copyright>
