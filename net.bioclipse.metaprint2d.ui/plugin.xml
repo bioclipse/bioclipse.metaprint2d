@@ -126,24 +126,29 @@
 <extension
          point="org.eclipse.core.expressions.definitions">
       <definition
-            id="net.bioclipse.definitions.activeMolEditor">
-         <with
-               variable="activeEditorId">               
-               <or>
-            <equals
-                  value="net.bioclipse.cdk.ui.editors.jchempaint">
-            </equals>
-            <equals
-                  value="net.bioclipse.cdk.ui.editors.jchempaint.mdl">
-            </equals>
-            <equals
-                  value="net.bioclipse.cdk.ui.editors.jchempaint.cml"> 
-            </equals>
-            <equals
-                  value="net.bioclipse.cdk.ui.sdfeditor"> 
-            </equals>
-            </or>
-         </with>
+            id="net.bioclipse.definitions.showM2dUIElements">
+         <and>
+	         <with
+	               variable="activeEditorId">
+	               <or>
+	            <equals
+	                  value="net.bioclipse.cdk.ui.editors.jchempaint">
+	            </equals>
+	            <equals
+	                  value="net.bioclipse.cdk.ui.editors.jchempaint.mdl">
+	            </equals>
+	            <equals
+	                  value="net.bioclipse.cdk.ui.editors.jchempaint.cml">
+	            </equals>
+	            <equals
+	                  value="net.bioclipse.cdk.ui.sdfeditor">
+	            </equals>
+	            </or>
+	         </with>
+			<with variable="activeWorkbenchWindow.activePerspective">
+	          <equals value="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective"/>
+		    </with>
+        </and>
       </definition>
       
 </extension>
@@ -156,6 +161,12 @@
     <menu
        id="net.bioclipse.metaprint2d"
        label="MetaPrint2D">
+       <visibleWhen
+             checkEnabled="false">
+                    	<with variable="activeWorkbenchWindow.activePerspective">
+          <equals value="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective"/>
+	    </with>
+       </visibleWhen>
     </menu>
  </menuContribution>
 
@@ -275,7 +286,7 @@
             icon="icons/metaprint2d.gif"
             tooltip="Execute MetaPrint2D on the active molecule(s)">
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
 
@@ -286,7 +297,7 @@
             icon="icons/molecule3D.gif"
             tooltip="Set molecule coloring to CPK">
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
 
@@ -298,7 +309,7 @@
             tooltip="Turn on automatic MetaPrint2D calculation for the active molecule(s)"
             style="toggle">
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
 
@@ -314,7 +325,7 @@
                 value="All">
         </parameter>
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
     <command
@@ -329,7 +340,7 @@
                 value="Dog">
         </parameter>
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
     <command
@@ -344,7 +355,7 @@
             value="Human">
         </parameter>
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+           <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
     <command
@@ -359,7 +370,7 @@
                 value="Rat">
         </parameter>
 		<visibleWhen>
-           <reference definitionId="net.bioclipse.definitions.activeMolEditor" />
+          <reference definitionId="net.bioclipse.definitions.showM2dUIElements" />
 		</visibleWhen>
     </command>
 
@@ -367,6 +378,11 @@
                   name="additions"
                   visible="false">
             </separator>
+<!--            <visibleWhen>
+                  	<with variable="activeWorkbenchWindow.activePerspective">
+      			          <equals value="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective"/>
+        		    </with>
+            </visibleWhen> -->
          </toolbar>
       </menuContribution>
 
@@ -442,12 +458,17 @@
         </parameter>
         <visibleWhen
               checkEnabled="false">
+           <and>
            <with
                  variable="activeEditor">
               <instanceof
                     value="net.bioclipse.cdk.ui.sdfeditor.editor.MultiPageMoleculesEditorPart">
               </instanceof>
            </with>
+           <with variable="activeWorkbenchWindow.activePerspective">
+	         <equals value="net.bioclipse.metaprint2d.ui.Metaprint2dPerspective"/>
+		   </with>
+		   </and>
         </visibleWhen>
      </command>
    </menuContribution>
