@@ -10,7 +10,6 @@
  ******************************************************************************/
 package net.bioclipse.metaprint2d;
 
- import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -41,12 +40,12 @@ public class Metaprinter {
 
 	private static final Logger logger = Logger.getLogger(Metaprinter.class);
 
-	public static final Color RED_COLOR=new Color(200,70,70);
-	public static final Color GREEN_COLOR=new Color(00,200,80);
-	public static final Color AMBER_COLOR=new Color(255,191,0);
-
-	public static final Color BLACK_COLOR = new Color(150,150,150);
-	public static final Color WHITE_COLOR = new Color(255,255,255);
+    // public static final Color RED_COLOR=new Color(200,70,70);
+    // public static final Color GREEN_COLOR=new Color(00,200,80);
+    // public static final Color AMBER_COLOR=new Color(255,191,0);
+    //
+    // public static final Color BLACK_COLOR = new Color(150,150,150);
+    // public static final Color WHITE_COLOR = new Color(255,255,255);
 
 //	private static final String DATAFILE_ALL = "/data/metab2008.1-all.bin";
 //	private static final String DATAFILE_DOG = "/data/metab2008.1-dog.bin";
@@ -222,21 +221,21 @@ public class Metaprinter {
 
     
     //This is the metaprint cutoff
-    public static Color getColorByMetprint( MetaPrintResult res ) {
-
-        double ratio=res.getNormalisedRatio();
-
-        if (ratio>0.66){
-            return Metaprinter.RED_COLOR;
-        }
-        else if (0.66>=ratio && ratio>0.33){
-            return Metaprinter.AMBER_COLOR;
-        }
-        else if (0.33>=ratio && ratio>0.15){
-            return Metaprinter.GREEN_COLOR;
-        }
-        return null;
-    }
+    // public static Color getColorByMetprint( MetaPrintResult res ) {
+    //
+    // double ratio=res.getNormalisedRatio();
+    //
+    // if (ratio>0.66){
+    // return Metaprinter.RED_COLOR;
+    // }
+    // else if (0.66>=ratio && ratio>0.33){
+    // return Metaprinter.AMBER_COLOR;
+    // }
+    // else if (0.33>=ratio && ratio>0.15){
+    // return Metaprinter.GREEN_COLOR;
+    // }
+    // return null;
+    // }
 
     public static void setSpecies( String parm ) {
 
