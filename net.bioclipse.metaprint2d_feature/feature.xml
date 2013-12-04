@@ -32,7 +32,6 @@ License (LGPL).
 
    <requires>
       <import feature="net.bioclipse.chemoinformatics_feature" version="2.4.0" match="greaterOrEqual"/>
-      <import plugin="net.bioclipse.cdk.debug"/>
    </requires>
 
    <plugin
