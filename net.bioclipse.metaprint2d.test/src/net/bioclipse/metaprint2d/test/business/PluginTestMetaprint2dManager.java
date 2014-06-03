@@ -130,7 +130,7 @@ public class PluginTestMetaprint2dManager {
 		ICDKMolecule mol=new CDKMolecule(ac);
     	
 		ICDKMolecule cdkMol=cdk.asCDKMolecule( mol);
-		Molecule metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypesNew(cdkMol);
+		Molecule metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypes(cdkMol);
 
 	    /*
 		"C.3","C.2","C.ar","C.1","N.3", "N.2","N.1","O.3","O.2","S.3",
