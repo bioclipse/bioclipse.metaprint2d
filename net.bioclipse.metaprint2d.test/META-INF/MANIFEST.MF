@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Metaprint2d test plugin
 Bundle-SymbolicName: net.bioclipse.metaprint2d.test
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-Activator: net.bioclipse.metaprint2d.test.Activator
 Bundle-Vendor: Ola Spjuth
 Require-Bundle: org.eclipse.ui,
