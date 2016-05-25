@@ -9,7 +9,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
 import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
+import org.openscience.cdk.graph.Cycles;
+import org.openscience.cdk.aromaticity.Aromaticity;
+import org.openscience.cdk.aromaticity.ElectronDonation;
 import org.openscience.cdk.atomtype.CDKAtomTypeMatcher;
 import org.openscience.cdk.atomtype.mapper.AtomTypeMapper;
 import org.openscience.cdk.config.AtomTypeFactory;
@@ -18,6 +20,7 @@ import org.openscience.cdk.exception.NoSuchAtomTypeException;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IAtomType;
+import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.AtomTypeManipulator;
 
 import net.bioclipse.cdk.business.Activator;
@@ -88,7 +91,11 @@ public class CDKHelper {
 		AtomTypeManipulator.configure(atom, type);
 	}
 	try {
-		CDKHueckelAromaticityDetector.detectAromaticity(ac);
+            // TODO Check this
+            Aromaticity aromaticity = new Aromaticity( ElectronDonation.cdk(), Cycles.cdkAromaticSet() );
+            // AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms( mol
+            // );
+            aromaticity.apply( ac );
 	} 
 	catch (CDKException e) {
 		logger.debug("Failed to perceive aromaticity: " + e.getMessage());
