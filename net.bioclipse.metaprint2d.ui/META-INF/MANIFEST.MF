@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MetaPrint2D
 Bundle-SymbolicName: net.bioclipse.metaprint2d.ui;singleton:=true
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-Activator: net.bioclipse.metaprint2d.ui.Activator
 Bundle-Vendor: The Bioclipse Team
 Eclipse-AutoStart: true
@@ -17,21 +17,21 @@ Require-Bundle: org.eclipse.ui,
  net.bioclipse.cdk.business,
  net.bioclipse.metaprint2d,
  org.eclipse.ui.forms,
- org.openscience.cdk.core;bundle-version="1.1.2",
- org.openscience.cdk.standard;bundle-version="1.1.2",
- org.openscience.cdk.data;bundle-version="1.1.2",
- org.openscience.cdk.interfaces;bundle-version="1.1.2",
- net.bioclipse.cdk.debug;bundle-version="2.0.0",
- org.openscience.cdk.atomtype;bundle-version="1.1.2",
- org.openscience.cdk.libiocml;bundle-version="1.1.2",
- net.bioclipse.cdk.jchempaint;bundle-version="2.0.0",
- net.bioclipse.cdk.jchempaint.view;bundle-version="2.0.0",
- org.openscience.cdk.render;bundle-version="1.1.3",
- net.bioclipse.cdk.ui.sdfeditor;bundle-version="2.0.0",
- org.openscience.cdk.ioformats;bundle-version="1.1.5",
- org.openscience.cdk.renderbasic;bundle-version="1.3.0",
- org.openscience.cdk.renderextra;bundle-version="1.3.5",
- javax.vecmath
+ org.openscience.cdk.core,
+ org.openscience.cdk.standard,
+ org.openscience.cdk.data,
+ org.openscience.cdk.interfaces,
+ org.openscience.cdk.atomtype,
+ org.openscience.cdk.libiocml,
+ net.bioclipse.cdk.jchempaint,
+ net.bioclipse.cdk.jchempaint.view,
+ org.openscience.cdk.render,
+ net.bioclipse.cdk.ui.sdfeditor,
+ org.openscience.cdk.ioformats,
+ org.openscience.cdk.renderbasic,
+ org.openscience.cdk.renderextra,
+ javax.vecmath,
+ org.eclipse.ui.views.properties.tabbed
 Import-Package: net.bioclipse.metaprint2d,
  org.apache.log4j
 Export-Package: net.bioclipse.metaprint2d.ui,

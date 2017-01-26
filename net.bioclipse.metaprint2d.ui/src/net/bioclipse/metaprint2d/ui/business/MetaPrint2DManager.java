@@ -28,12 +28,10 @@ import net.sf.metaprint2d.mol2.Mol2Reader;
 import net.sf.metaprint2d.mol2.Molecule;
 import net.bioclipse.cdk.business.ICDKManager;
 import net.bioclipse.cdk.domain.ICDKMolecule;
-import net.bioclipse.cdkdebug.business.ICDKDebugManager;
 import net.bioclipse.core.ResourcePathTransformer;
 import net.bioclipse.core.business.BioclipseException;
 import net.bioclipse.core.domain.IMolecule;
 import net.bioclipse.metaprint2d.Metaprinter;
-import net.bioclipse.metaprint2d.Species;
 import net.bioclipse.metaprint2d.ui.Activator;
 import net.bioclipse.metaprint2d.ui.Metaprint2DConstants;
 import net.bioclipse.metaprint2d.ui.cdk.CDK2MetaprintConverter;
@@ -47,14 +45,17 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.openscience.cdk.exception.CDKException;
-import org.openscience.cdk.interfaces.IChemFile;
-import org.openscience.cdk.io.formats.CMLFormat;
 import org.openscience.cdk.io.formats.IChemFormat;
+
+/**
+ * 
+ * @author ola
+ *
+ */
 
 public class MetaPrint2DManager implements IMetaPrint2DManager{
 
     private static final Logger logger = Logger.getLogger(MetaPrint2DManager.class);
-
 
     ICDKManager cdk;
 
@@ -195,14 +196,13 @@ public class MetaPrint2DManager implements IMetaPrint2DManager{
         //        logger.debug("Calculating MetaPrint2D with DB: " + Metaprinter.getSpecies());
 
         //Depict atom types
-        net.bioclipse.cdkdebug.Activator.getDefault()
-                            .getJavaManager().perceiveSybylAtomTypes(cdkmol_in);
+        CDKHelper.perceiveSybylAtomTypes(cdkmol_in);
 
         //Convert to Metaprint Molecule
         Molecule metamol=null;
         try {
             metamol=CDK2MetaprintConverter
-                              .getMetaprintMoleculeWithSybylTypesNew(cdkmol_in);
+                              .getMetaprintMoleculeWithSybylTypes(cdkmol_in);
         } catch (CDKException e) {
             logger.error("Could not convert " +
                          "molecule with CDK. Reason: " + e.getMessage());
@@ -243,7 +243,7 @@ public class MetaPrint2DManager implements IMetaPrint2DManager{
         else{
             try {
                 ICDKMolecule cdkMol=cdk.asCDKMolecule( cdkmol_in);
-                metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypesNew(cdkMol);
+                metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypes(cdkMol);
             } catch (CDKException e) {
                 logger.error("Could not convert " +
                              "molecule with CDK. Reason: " + e.getMessage());
@@ -273,7 +273,7 @@ public class MetaPrint2DManager implements IMetaPrint2DManager{
 
         try {
             ICDKMolecule cdkMol=cdk.asCDKMolecule( cdkmol_in);
-            metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypesNew(cdkMol);
+            metamol=CDK2MetaprintConverter.getMetaprintMoleculeWithSybylTypes(cdkMol);
         } catch (CDKException e) {
             logger.error("Could not convert " +
                          "molecule with CDK. Reason: " + e.getMessage());
@@ -463,8 +463,9 @@ public class MetaPrint2DManager implements IMetaPrint2DManager{
             return;
         }
         
-        if (database==null) throw new IllegalArgumentException(database + 
-               " is not a valid database (must be one of All, Dog, Rat, and Human). ");
+        throw new IllegalArgumentException(database + 
+               " is not a valid metaprint2d database "
+               + "(must be one of All, Dog, Rat, and Human). ");
 
     }
 

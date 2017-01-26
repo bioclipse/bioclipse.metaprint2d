@@ -31,7 +31,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IPerspectiveListener3;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.contexts.IContextService;
@@ -100,6 +104,50 @@ public class Activator extends AbstractUIPlugin implements IPartListener, IConte
 		                    .getWorkbench().getService(IContextService.class);
 		        contextService.addContextManagerListener( Activator.getDefault() );
 
+		        //Add perspective change listener to turn off external generators
+		        //when switching AWAY FROM m2d-perspective
+		        
+		        PlatformUI.getWorkbench().getActiveWorkbenchWindow().addPerspectiveListener(new IPerspectiveListener3(){
+
+					@Override
+					public void perspectiveChanged(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1, IWorkbenchPartReference arg2,
+							String arg3) {}
+					@Override
+					public void perspectiveActivated(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1) {}
+					@Override
+					public void perspectiveChanged(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1, String arg2) {}
+
+					@Override
+					public void perspectiveClosed(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1) {}
+
+					@Override
+					public void perspectiveDeactivated(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1) {
+
+						if ("net.bioclipse.metaprint2d.ui.Metaprint2dPerspective".equals(arg1.getId())){
+			                JChemPaintEditor jcp=getJCPfromActiveEditor();
+			                if (jcp==null) return;
+
+			                GeneratorHelper.turnOffAllExternalGenerators(jcp);
+						}
+						
+					}
+
+					@Override
+					public void perspectiveOpened(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1) {}
+
+					@Override
+					public void perspectiveSavedAs(IWorkbenchPage arg0,
+							IPerspectiveDescriptor arg1, IPerspectiveDescriptor arg2) {}
+		        });
+		        
+		        
+		        
 		        
 		        return new Status(IStatus.OK,
 		            PLUGIN_ID,
@@ -110,6 +158,37 @@ public class Activator extends AbstractUIPlugin implements IPartListener, IConte
 		job.schedule();
 		
 	}
+	
+	
+    private JChemPaintEditor getJCPfromActiveEditor() {
+        
+    	if (PlatformUI.getWorkbench()==null) return null;
+        if (PlatformUI.getWorkbench().getActiveWorkbenchWindow()==null) return null;
+        if (PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()==null) return null;
+
+        IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+        return getJCPfromEditor(editor);
+    }
+    
+    private JChemPaintEditor getJCPfromEditor(IEditorPart editor) {
+    	
+    	if (editor instanceof JChemPaintEditor) {
+    		return (JChemPaintEditor)editor;			
+    	}
+    	else if (editor instanceof MultiPageMoleculesEditorPart) {
+    		MultiPageMoleculesEditorPart moltable = (MultiPageMoleculesEditorPart) editor;
+    		if (moltable.isJCPVisible()){
+				Object obj = moltable.getSelectedPage();
+				if (obj instanceof JChemPaintEditor) {
+					return (JChemPaintEditor) obj;
+				}
+    		}
+    	}
+
+    	return null;
+	}
+
+	
 
 	/*
 	 * (non-Javadoc)

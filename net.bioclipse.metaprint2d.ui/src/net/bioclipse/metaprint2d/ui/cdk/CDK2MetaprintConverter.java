@@ -10,23 +10,15 @@
  ******************************************************************************/
 package net.bioclipse.metaprint2d.ui.cdk;
 
- import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.openscience.cdk.atomtype.CDKAtomTypeMatcher;
-import org.openscience.cdk.atomtype.SybylAtomTypeMatcher;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IAtomType;
-import org.openscience.cdk.tools.manipulator.AtomTypeManipulator;
 
 import net.bioclipse.cdk.domain.ICDKMolecule;
-import net.bioclipse.cdkdebug.business.CDKDebugManager;
-import net.bioclipse.cdkdebug.business.ICDKDebugManager;
 import net.sf.metaprint2d.Constants;
 import net.sf.metaprint2d.mol2.Atom;
 import net.sf.metaprint2d.mol2.Molecule;
@@ -77,7 +69,7 @@ public class CDK2MetaprintConverter {
 	    	
 		}
 	
-	public static Molecule getMetaprintMoleculeWithSybylTypesNew(ICDKMolecule cdkmol) throws CDKException{
+	public static Molecule getMetaprintMoleculeWithSybylTypes(ICDKMolecule cdkmol) throws CDKException{
 
 		
 		IAtomContainer ac=cdkmol.getAtomContainer();
