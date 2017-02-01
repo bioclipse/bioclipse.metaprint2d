@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MetaPrint2D
 Bundle-SymbolicName: net.bioclipse.metaprint2d.ui;singleton:=true
-Bundle-Version: 2.6.2.qualifier
+Bundle-Version: 2.7.0.qualifier
 Bundle-Activator: net.bioclipse.metaprint2d.ui.Activator
 Bundle-Vendor: The Bioclipse Team
 Eclipse-AutoStart: true
@@ -17,23 +17,28 @@ Require-Bundle: org.eclipse.ui,
  net.bioclipse.cdk.business,
  net.bioclipse.metaprint2d,
  org.eclipse.ui.forms,
- org.openscience.cdk.core,
- org.openscience.cdk.standard,
- org.openscience.cdk.data,
- org.openscience.cdk.interfaces,
- org.openscience.cdk.atomtype,
- org.openscience.cdk.libiocml,
  net.bioclipse.cdk.jchempaint,
  net.bioclipse.cdk.jchempaint.view,
- org.openscience.cdk.render,
  net.bioclipse.cdk.ui.sdfeditor,
- org.openscience.cdk.ioformats,
- org.openscience.cdk.renderbasic,
- org.openscience.cdk.renderextra,
  javax.vecmath,
  org.eclipse.ui.views.properties.tabbed
 Import-Package: net.bioclipse.metaprint2d,
- org.apache.log4j
+ org.apache.log4j,
+ org.openscience.cdk;version="1.5.13",
+ org.openscience.cdk.aromaticity;version="1.5.13",
+ org.openscience.cdk.atomtype;version="1.5.13",
+ org.openscience.cdk.atomtype.mapper;version="1.5.13",
+ org.openscience.cdk.config;version="1.5.13",
+ org.openscience.cdk.exception;version="1.5.13",
+ org.openscience.cdk.graph;version="1.5.13",
+ org.openscience.cdk.interfaces;version="1.5.13",
+ org.openscience.cdk.io.formats;version="1.5.13",
+ org.openscience.cdk.renderer;version="1.5.13",
+ org.openscience.cdk.renderer.color;version="1.5.13",
+ org.openscience.cdk.renderer.elements;version="1.5.13",
+ org.openscience.cdk.renderer.generators;version="1.5.13",
+ org.openscience.cdk.renderer.generators.parameter;version="1.5.13",
+ org.openscience.cdk.tools.manipulator;version="1.5.13"
 Export-Package: net.bioclipse.metaprint2d.ui,
  net.bioclipse.metaprint2d.ui.business,
  net.bioclipse.metaprint2d.ui.cdk
